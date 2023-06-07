@@ -4,7 +4,7 @@ const countryFlags = `https://flagsapi.com/:country_code/flat/64.png`;
 const cityInput = document.querySelector("#city-input");
 const btnSearch = document.querySelector("#search");
 
-const weatherData = document.getElementById("weather-data");
+const weatherData = document.querySelector("#weather-data");
 
 const cityElement = document.querySelector("#city-name");
 const tempElement = document.querySelector("#temperature span");
@@ -40,8 +40,11 @@ const showWeatherData = async(city) => {
     `https://flagsapi.com/${data.sys.country}/flat/64.png`
   );
 
-  humidityElement.innerText = `${data.main.hhumidity}%`;
+  humidityElement.innerText = `${data.main.humidity}%`;
   windElement.innerText = `${data.wind.speed}km/h`;
+
+  weatherData.classList.remove("hide")
+  weatherData.classList.add("weather-data")
 
   console.log(data);
 }
