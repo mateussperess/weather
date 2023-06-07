@@ -1,12 +1,14 @@
 const apiKey = "0ad24f658930ed65c9175a7a2a3521e4";
 const countryFlags = `https://flagsapi.com/:country_code/flat/64.png`;
 
+const unsplashApiKey = "8_JrN-pdBVtxjOia09vf6iCn0OAQZwki42Y5ZL0MhJY";
+
 const cityInput = document.querySelector("#city-input");
 const btnSearch = document.querySelector("#search");
 
 const weatherData = document.querySelector("#weather-data");
 
-const cityElement = document.querySelector("#city-name");
+const cityElement = document.querySelector("#city-name"); // CITY_NAME
 const tempElement = document.querySelector("#temperature span");
 const descElement = document.querySelector("#description");
 const countryElement = document.querySelector("#country");
@@ -25,8 +27,25 @@ const getWeatherData = async(city) => {
   return data;
 } 
 
+const getCityImage = async(cityElement) => {
+  let apiPhotoURL = `https://api.unsplash.com/search/photos?client_id=${unsplashApiKey}&query=${cityElement}&orientation=landscape`;
+  let res = await fetch(apiPhotoURL);
+  let data = await res.json();
+
+  console.log(data.results[0]);
+  return data.results[0];
+}
+
 const showWeatherData = async(city) => {
   let data = await getWeatherData(city);
+
+  let dataImage = await getCityImage(city);
+  let bodyElement = document.body;
+
+  // console.log(dataImage.urls.full);
+
+  bodyElement.style.backgroundImage = `${dataImage.urls.full}`;
+  
 
   cityElement.innerText = data.name;
   tempElement.innerText = parseInt(data.main.temp);
@@ -42,8 +61,8 @@ const showWeatherData = async(city) => {
   humidityElement.innerText = `${data.main.humidity}%`;
   windElement.innerText = `${data.wind.speed}km/h`;
 
-  weatherData.classList.remove("hide")
-  weatherData.classList.add("weather-data")
+  weatherData.classList.remove("hide");
+  weatherData.classList.add("weather-data");
 
   console.log(data);
 }
@@ -63,4 +82,5 @@ cityInput.addEventListener("keyup", (e) => {
 
     showWeatherData(city);
   }
-})
+});
+
