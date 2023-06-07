@@ -22,7 +22,6 @@ body .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 30rem;
   width: 20rem;
 }
 body .container svg {
@@ -62,6 +61,9 @@ body .container .form .form-input-container button i {
 body .container .form .form-input-container button:hover {
   cursor: pointer;
 }
+body .container .hide {
+  display: none;
+}
 body .container #weather-data {
   display: flex;
   flex-direction: column;
@@ -87,6 +89,9 @@ body .container #weather-data #description-container {
   justify-content: center;
   align-items: center;
 }
+body .container #weather-data #description-container #description {
+  text-transform: capitalize;
+}
 body .container #weather-data #details-container {
   display: flex;
   flex-direction: row;
@@ -94,12 +99,8 @@ body .container #weather-data #details-container {
   align-items: center;
   margin: 1rem 0;
 }
-body .container #weather-data #details-container #umidity {
+body .container #weather-data #details-container #humidity {
   border-right: 1px solid #ffffff;
   margin: 1rem;
   padding: 1rem;
-}
-
-.hide {
-  display: none;
 }/*# sourceMappingURL=styles.css.map */
