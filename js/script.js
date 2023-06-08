@@ -32,21 +32,21 @@ const getCityImage = async(cityElement) => {
   let res = await fetch(apiPhotoURL);
   let data = await res.json();
 
-  console.log(data.results[0]);
-  return data.results[0];
+  const randomIndex = Math.floor(Math.random() * data.results.length);
+  return data.results[randomIndex].urls.regular;
 }
 
 const showWeatherData = async(city) => {
   let data = await getWeatherData(city);
-
   let dataImage = await getCityImage(city);
   let bodyElement = document.body;
 
-  // console.log(dataImage.urls.full);
-
-  bodyElement.style.backgroundImage = `${dataImage.urls.full}`;
-  
-
+  bodyElement.style.backgroundImage = `url(${dataImage})`;
+  bodyElement.style.backgroundSize = `cover`;
+  bodyElement.style.backgroundPosition = `center`;
+  bodyElement.style.backgroundAttachment = `fixed`;
+  bodyElement.style.backgroundRepeat = `no-repeat`;
+   
   cityElement.innerText = data.name;
   tempElement.innerText = parseInt(data.main.temp);
   descElement.innerText = data.weather[0].description;
@@ -64,7 +64,7 @@ const showWeatherData = async(city) => {
   weatherData.classList.remove("hide");
   weatherData.classList.add("weather-data");
 
-  console.log(data);
+  console.log(bodyElement.style.backgroundImage);
 }
 
 // events

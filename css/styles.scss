@@ -20,7 +20,8 @@ body {
   justify-content: center;
 
   .container {
-    background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 2rem;
     color: #fdfdfd;
