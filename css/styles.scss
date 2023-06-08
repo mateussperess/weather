@@ -9,6 +9,16 @@
   display: none;
 }
 
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   background: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);
@@ -75,6 +85,21 @@ body {
         button:hover {
           cursor: pointer;
         }
+      }
+    }
+
+    .loader {
+      .loader-icon {
+        margin-top: 1rem;
+        width: 30px;
+        height: 30px;
+        background-color: transparent;
+        display: block;
+        border: 5px solid #0c3483;
+        border-top: 5px solid transparent;
+        border-radius: 50%;
+
+        animation: loading 0.5s infinite ease-in-out;
       }
     }
 

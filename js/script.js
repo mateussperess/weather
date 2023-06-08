@@ -8,6 +8,8 @@ const btnSearch = document.querySelector("#search");
 
 const weatherData = document.querySelector("#weather-data");
 
+const loaderElement = document.querySelector("#loader");
+
 const cityElement = document.querySelector("#city-name"); // CITY_NAME
 const tempElement = document.querySelector("#temperature span");
 const descElement = document.querySelector("#description");
@@ -16,11 +18,9 @@ const weatherIconElement = document.querySelector("#weather-icon");
 const humidityElement = document.querySelector("#humidity span");
 const windElement = document.querySelector("#wind span");
 
-
 // functions
 const getWeatherData = async(city) => {
   const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`
-  //                     https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=0ad24f658930ed65c9175a7a2a3521e4
   const res = await fetch(apiWeatherURL);
   const data = await res.json();
 
@@ -63,24 +63,42 @@ const showWeatherData = async(city) => {
 
   weatherData.classList.remove("hide");
   weatherData.classList.add("weather-data");
-
-  console.log(bodyElement.style.backgroundImage);
 }
+
+const showLoader = () => {
+  weatherData.classList.remove("weather-data");
+  weatherData.classList.add("hide");
+  loaderElement.classList.remove("hide");
+};
+
+const hideLoader = () => {
+  weatherData.classList.add("weather-data");
+  weatherData.classList.remove("hide");
+  loaderElement.classList.add("hide");
+};
 
 // events
 
 btnSearch.addEventListener("click", (e) => {
   e.preventDefault;
   const city = cityInput.value;
+  showLoader();
 
-  showWeatherData(city);
+  setTimeout(async () => {
+    await showWeatherData(city);
+    hideLoader();
+  }, 2000);
 }); 
 
 cityInput.addEventListener("keyup", (e) => {
   if(e.code === "Enter") {
     let city = e.target.value;
 
-    showWeatherData(city);
+    showLoader();
+
+    setTimeout(async () => {
+      await showWeatherData(city);
+      hideLoader();
+    }, 1000);
   }
 });
-
