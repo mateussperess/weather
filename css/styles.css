@@ -81,7 +81,7 @@ body .container .loader .loader-icon {
   height: 30px;
   background-color: transparent;
   display: block;
-  border: 5px solid #0c3483;
+  border: 5px solid #ffffff;
   border-top: 5px solid transparent;
   border-radius: 50%;
   animation: loading 0.5s infinite ease-in-out;
